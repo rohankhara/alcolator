@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "MainMenuViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,11 +22,14 @@
     
     // Override point for customization after application launch.
     
-    ViewController *viewController = [[ViewController alloc] init];
-    self.window.rootViewController = viewController;
+    // ViewController *viewController = [[ViewController alloc] init];
+    // self.window.rootViewController = viewController;
+    MainMenuViewController *mainMenuViewController = [MainMenuViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     return YES;
-    return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

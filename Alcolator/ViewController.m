@@ -54,6 +54,8 @@
     
     // Gets rid of the maximum number of lines on the label
     self.resultLabel.numberOfLines = 0;
+    
+         self.title = NSLocalizedString(@"Wine", @"wine");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -136,25 +138,21 @@
     
     } */
         
-    
-        
-    
-    
-   CGFloat viewWidth = 320;
+    CGFloat viewWidth = 320;
     CGFloat padding = 20;
     CGFloat itemWidth = viewWidth - padding - padding;
     CGFloat itemHeight = 44;
     
-    self.beerPercentTextField.frame = CGRectMake(padding, padding, itemWidth, itemHeight);
+    self.beerPercentTextField.frame = CGRectMake(padding, (6*padding), itemWidth, itemHeight);
     
     CGFloat bottomOfTextField = CGRectGetMaxY(self.beerPercentTextField.frame);
-    self.beerCountSlider.frame = CGRectMake(padding, bottomOfTextField + padding, itemWidth, itemHeight);
+    self.beerCountSlider.frame = CGRectMake(padding, bottomOfTextField + (0.5*padding), itemWidth, itemHeight);
     
     CGFloat bottomOfSlider = CGRectGetMaxY(self.beerCountSlider.frame);
-    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + padding, itemWidth, itemHeight * 4);
+    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + (0.5*padding), itemWidth, itemHeight * 4);
     
     CGFloat bottomOfLabel = CGRectGetMaxY(self.resultLabel.frame);
-    self.calculateButton.frame = CGRectMake(padding, bottomOfLabel + padding, itemWidth, itemHeight);
+    self.calculateButton.frame = CGRectMake(padding, bottomOfLabel + (0.5*padding), itemWidth, itemHeight);
 }
 
 - (void)textFieldDidChange:(UITextField *)sender
@@ -182,6 +180,23 @@
     [self.beerPercentTextField resignFirstResponder];
    // NSString *resultText2 = [NSString stringWithFormat:@"%f", self.beerCountSlider.value];
     // self.realTimeSliderValue.text = resultText2;
+    
+    int numberOfBeers = self.beerCountSlider.value;
+    int ouncesInOneBeerGlass = 12;  //assume they are 12oz beer bottles
+    
+    float alcoholPercentageOfBeer = [self.beerPercentTextField.text floatValue] / 100;
+    float ouncesOfAlcoholPerBeer = ouncesInOneBeerGlass * alcoholPercentageOfBeer;
+    float ouncesOfAlcoholTotal = ouncesOfAlcoholPerBeer * numberOfBeers;
+    
+    // now, calculate the equivalent amount of wine...
+    
+    float ouncesInOneWineGlass = 5;  // wine glasses are usually 5oz
+    float alcoholPercentageOfWine = 0.13;  // 13% is average
+    
+    float ouncesOfAlcoholPerWineGlass = ouncesInOneWineGlass * alcoholPercentageOfWine;
+    float numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
+    NSString *titleText = [NSString stringWithFormat:@"Wineee (%.1f glasses)", numberOfWineGlassesForEquivalentAlcoholAmount];
+    self.title = titleText;
     
 }
 
