@@ -22,7 +22,7 @@
     
     // Override point for customization after application launch.
     
-    // ViewController *viewController = [[ViewController alloc] init];
+     // ViewController *viewController = [[ViewController alloc] init];
     // self.window.rootViewController = viewController;
     MainMenuViewController *mainMenuViewController = [MainMenuViewController new];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
