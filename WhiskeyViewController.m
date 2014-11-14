@@ -17,7 +17,8 @@
 -(void) viewDidLoad
 {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"Whiskey", @"whiskey");
+  //  self.title = NSLocalizedString(@"Whiskey", @"whiskey");
+    self.view.backgroundColor = [UIColor colorWithRed:0.667 green:0.554 blue:0.200 alpha:1];
     
 }
 
@@ -57,7 +58,9 @@
     
     NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ contains as much alcohol as %.1f %@ of whiskey.", nil), numberOfBeers, beerText, numberOfWhiskeyGlassesForEquivalentAlcoholAmount, whiskeyText];
     self.resultLabel.text = resultText;
+    [self helloWorld];
 }
+
 
 - (void)sliderValueDidChange:(UISlider *)sender
 
@@ -68,6 +71,7 @@
     // self.realTimeSliderValue.text = resultText2;
     int numberOfBeers = self.beerCountSlider.value;
     int ouncesInOneBeerGlass = 12;  //assume they are 12oz beer bottles
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) self.beerCountSlider.value]];
     
     float alcoholPercentageOfBeer = [self.beerPercentTextField.text floatValue] / 100;
     float ouncesOfAlcoholPerBeer = ouncesInOneBeerGlass * alcoholPercentageOfBeer;
@@ -84,6 +88,15 @@
         }
 
 
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        self.title = NSLocalizedString(@"Whiskey", nil);
+        [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+        
+    }
+    return self;
+}
 
 /*
 #pragma mark - Navigation

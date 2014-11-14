@@ -9,7 +9,6 @@
 #import "ViewController.h"
 
 @interface ViewController ()  <UITextFieldDelegate>
-
 @property (weak, nonatomic) UIButton *calculateButton;
 @property (weak, nonatomic) UITapGestureRecognizer *hideKeyboardTapGestureRecognizer;
 
@@ -29,6 +28,7 @@
     
     // Tells the text field that `self`, this instance of `BLCViewController` should be treated as the text field's delegate
     self.beerPercentTextField.delegate = self;
+        
     self.beerPercentTextField.backgroundColor = [UIColor blueColor];
     self.beerPercentTextField.font = [UIFont fontWithName:@"Arial" size:15];
     
@@ -55,7 +55,8 @@
     // Gets rid of the maximum number of lines on the label
     self.resultLabel.numberOfLines = 0;
     
-         self.title = NSLocalizedString(@"Wine", @"wine");
+         // self.title = NSLocalizedString(@"Wine", @"wine");
+    self.view.backgroundColor = [UIColor colorWithRed:0.741 green:0.925 blue:0.714 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,8 +70,9 @@
 {
 
     //Allocate and initialize the all-encompassing view
-    self.view = [UIView new];
+     self.view = [UIView new];
     
+    // [super loadView]; <-- why dont
     // Allocate and initialize each of our views and the gesture recognizer
     UITextField *textField = [UITextField new];
     UILabel *label = [UILabel new];
@@ -172,6 +174,12 @@
     
 }
 
+-(void)helloWorld
+{
+    NSLog(@"Hello World!");
+    
+
+}
 
 - (void)sliderValueDidChange:(UISlider *)sender
     
@@ -180,6 +188,8 @@
     [self.beerPercentTextField resignFirstResponder];
    // NSString *resultText2 = [NSString stringWithFormat:@"%f", self.beerCountSlider.value];
     // self.realTimeSliderValue.text = resultText2;
+    
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) self.beerCountSlider.value]];
     
     int numberOfBeers = self.beerCountSlider.value;
     int ouncesInOneBeerGlass = 12;  //assume they are 12oz beer bottles
@@ -246,9 +256,19 @@
     NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ contains as much alcohol as %.1f %@ of wine.", nil), numberOfBeers, beerText, numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
     self.resultLabel.text = resultText;
 
+ }
+
+- (instancetype) init {
+    self = [super init];
     
+    if (self) {
+        self.title = NSLocalizedString(@"Wine", @"wine");
+        [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -18)];
+    }
     
+    return self;
 }
+
 
 
 - (void)tapGestureDidFire:(UITapGestureRecognizer *)sender

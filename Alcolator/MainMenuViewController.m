@@ -73,9 +73,9 @@
 -(void) viewWillLayoutSubviews
 
 {
+    [super viewWillLayoutSubviews];
 
-
-    CGFloat viewWidth = 320;
+    CGFloat viewWidth = self.view.frame.size.width;
     CGFloat padding = 20;
     CGFloat itemWidth = viewWidth - padding - padding;
     CGFloat itemHeight = 44;

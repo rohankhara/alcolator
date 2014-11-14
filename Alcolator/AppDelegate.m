@@ -9,9 +9,11 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "MainMenuViewController.h"
+#import "WhiskeyViewController.h"
 
-@interface AppDelegate ()
 
+
+@interface AppDelegate () <UITabBarControllerDelegate>
 @end
 
 @implementation AppDelegate
@@ -24,13 +26,29 @@
     
      // ViewController *viewController = [[ViewController alloc] init];
     // self.window.rootViewController = viewController;
-    MainMenuViewController *mainMenuViewController = [MainMenuViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
-    self.window.rootViewController = navigationController;
+     // MainMenuViewController *mainMenuViewController = [MainMenuViewController new];
+//     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+  //   self.window.rootViewController = navigationController;
+    
+     WhiskeyViewController *whiskeyVC = [WhiskeyViewController new];
+     ViewController *wineVC = [ViewController new];
+     UITabBarController *tabBarVC = [UITabBarController new];
+     tabBarVC.delegate = self;
+     tabBarVC.viewControllers = @[whiskeyVC, wineVC];
+    self.window.rootViewController = tabBarVC;
+
+  
     [self.window makeKeyAndVisible];
     return YES;
 
 }
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *) vcName
+{
+
+    NSLog(@"%@", vcName.title);
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
